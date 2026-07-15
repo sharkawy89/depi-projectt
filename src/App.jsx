@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Header from "./components/Header/Header";
+import Login from "./pages/Login";
 import Students from "./pages/Students";
 import Teachers from "./pages/Teachers";
 import Dashboard from "./pages/Dashboard";
@@ -10,8 +11,16 @@ import Courses from "./pages/Courses";
 import Settings from "./pages/Settings";
 
 function App() {
-  // controls the mobile sidebar drawer
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return (
+      <Routes>
+        <Route path="*" element={<Login setAuth={setIsAuthenticated} />} />
+      </Routes>
+    );
+  }
 
   return (
     <div className="app-layout">
