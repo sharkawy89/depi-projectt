@@ -1,0 +1,27 @@
+.settings-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+
+.settings-tab {
+  padding: 12px 20px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.settings-tab:hover {
+  color: #374151;
+}
+
+.settings-tab.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}

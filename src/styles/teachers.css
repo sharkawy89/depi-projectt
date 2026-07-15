@@ -1,0 +1,22 @@
+/* Page specific styling for the Teachers page stat cards */
+
+.stat-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 26px 16px;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-value {
+  color: #2563eb;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}

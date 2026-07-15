@@ -1,0 +1,7 @@
+/* Page specific tweaks for the Students page.
+   Most of the shared look (card, table, badges, modal) lives in app.css
+   so both Students and Teachers pages stay visually consistent. */
+
+.students-page .content-card {
+  margin-top: 10px;
+}
