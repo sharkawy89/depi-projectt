@@ -7,8 +7,6 @@ import Teachers from "./pages/Teachers";
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
 import Courses from "./pages/Courses";
-import Grades from "./pages/Grades";
-import Finance from "./pages/Finance";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -29,8 +27,6 @@ function App() {
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/courses" element={<Courses />} />
-          <Route path="/grades" element={<Grades />} />
-          <Route path="/finance" element={<Finance />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
