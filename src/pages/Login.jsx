@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BsEnvelope, BsLock, BsEye, BsEyeSlash, BsArrowRight, BsExclamationCircle } from 'react-icons/bs';
 
-function Login({ setAuth }) {
+function Login({ setAuth, userPassword }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +16,7 @@ function Login({ setAuth }) {
     setError('');
 
     setTimeout(() => {
-      if (email === 'admin@depi.edu' && password === 'admin123') {
+      if (email === 'admin@depi.edu' && password === userPassword) {
         setAuth(true);
         navigate('/dashboard');
       } else {

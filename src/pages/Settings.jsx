@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../styles/settings.css';
 
-function Settings() {
+function Settings({ userPassword, setUserPassword }) {
   const [activeTab, setActiveTab] = useState('general');
   const [twoFactor, setTwoFactor] = useState(false);
   const [is2FAModalOpen, setIs2FAModalOpen] = useState(false);
@@ -10,6 +10,7 @@ function Settings() {
   const [passwords, setPasswords] = useState({ current: '', new: '' });
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   const [passwordUpdated, setPasswordUpdated] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const tabs = [
     { id: 'general', label: 'General Profile', icon: 'bi-person' },
@@ -18,13 +19,23 @@ function Settings() {
 
   const handlePasswordUpdate = () => {
     if (!passwords.current || !passwords.new) return;
+    if (passwords.current !== userPassword) {
+      setPasswordError('Current password is incorrect.');
+      return;
+    }
+    if (passwords.new.length < 6) {
+      setPasswordError('New password must be at least 6 characters.');
+      return;
+    }
+    setPasswordError('');
     setIsSavingPassword(true);
     setTimeout(() => {
+      setUserPassword(passwords.new);
       setIsSavingPassword(false);
       setPasswordUpdated(true);
       setPasswords({ current: '', new: '' });
       setTimeout(() => setPasswordUpdated(false), 3000);
-    }, 1000);
+    }, 500);
   };
 
   const handle2FAToggle = () => {
@@ -100,12 +111,20 @@ function Settings() {
           <div className="row g-3" style={{ maxWidth: 500 }}>
             <div className="col-12">
               <label className="form-label" style={{ fontSize: 13, fontWeight: 500, color: '#374151' }}>Current Password</label>
-              <input type="password" className="form-control" value={passwords.current} onChange={(e) => setPasswords({...passwords, current: e.target.value})} />
+              <input type="password" className="form-control" value={passwords.current} onChange={(e) => { setPasswordError(''); setPasswords({...passwords, current: e.target.value}); }} />
             </div>
             <div className="col-12">
               <label className="form-label" style={{ fontSize: 13, fontWeight: 500, color: '#374151' }}>New Password</label>
-              <input type="password" className="form-control" value={passwords.new} onChange={(e) => setPasswords({...passwords, new: e.target.value})} />
+              <input type="password" className="form-control" value={passwords.new} onChange={(e) => { setPasswordError(''); setPasswords({...passwords, new: e.target.value}); }} />
             </div>
+            {passwordError && (
+              <div className="col-12">
+                <div className="alert alert-danger d-flex align-items-center small py-2 mb-0" role="alert">
+                  <i className="bi bi-exclamation-circle me-2"></i>
+                  <div>{passwordError}</div>
+                </div>
+              </div>
+            )}
             <div className="col-12">
               <button
                 className="btn btn-primary add-btn"

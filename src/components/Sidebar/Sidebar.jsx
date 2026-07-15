@@ -11,7 +11,7 @@ const menuItems = [
 ];
 
 // isOpen / onClose are only used on mobile to show/hide the sidebar as a drawer
-function Sidebar({ isOpen, onClose }) {
+function Sidebar({ isOpen, onClose, onLogout }) {
   return (
     <>
       {/* dark overlay behind the drawer, only shown on mobile when open */}
@@ -45,6 +45,16 @@ function Sidebar({ isOpen, onClose }) {
             </NavLink>
           ))}
         </nav>
+
+        <div className="sidebar-logout">
+          <button
+            className="sidebar-link logout-btn"
+            onClick={() => { onLogout(); onClose(); }}
+          >
+            <i className="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+          </button>
+        </div>
       </aside>
     </>
   );

@@ -13,18 +13,19 @@ import Settings from "./pages/Settings";
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userPassword, setUserPassword] = useState('admin123');
 
   if (!isAuthenticated) {
     return (
       <Routes>
-        <Route path="*" element={<Login setAuth={setIsAuthenticated} />} />
+        <Route path="*" element={<Login setAuth={setIsAuthenticated} userPassword={userPassword} />} />
       </Routes>
     );
   }
 
   return (
     <div className="app-layout">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} onLogout={() => setIsAuthenticated(false)} />
 
       <div className="app-main">
         <Header onMenuClick={() => setSidebarOpen(true)} />
@@ -36,7 +37,7 @@ function App() {
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/courses" element={<Courses />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<Settings userPassword={userPassword} setUserPassword={setUserPassword} />} />
         </Routes>
       </div>
     </div>
